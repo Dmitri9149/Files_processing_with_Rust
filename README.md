@@ -5,10 +5,14 @@ The final structure on the pipelines is still not clear, has to be arised within
 
 Now the project contains: 
 
-main.rs -> get the zip file from web
-csv.rs -> bin crate to work with csv files using Rust tools (read, write etc..)
-zip.rs -> bin crate for working with zip files (zip, unzip, read, write)
-data/csv : folder for csv files
+src/main.rs -> get the zip file from web  
+
+src/bin/csv.rs -> bin crate to work with csv files using Rust tools (read, write etc..)   
+
+src/bin/zip.rs -> bin crate for working with zip files (zip, unzip, read, write)  
+
+data/csv : folder for csv files  
+
 lib.rs : extract useful functions from bin crates for later use
 
 ------------------------------------------------------
