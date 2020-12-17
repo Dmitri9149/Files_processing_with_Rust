@@ -24,10 +24,9 @@ fn run() -> Result<(), Box<dyn Error>> {
     // Loop over each record.
     for result in rdr.records() {
 // exam. results ; OK -> Ok() ; problems -> convert error to Box<error> 
-        match result {
-            Ok(record) => println!("{:?}", record),
-            Err(err) => return Err(From::from(err))
-        }
+// use ? syntactic sugare
+        let record = result?;
+        println!("{:?}", record);
     }
     Ok(())
 }
