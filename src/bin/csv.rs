@@ -8,6 +8,7 @@ extern crate csv;
 
 // Import the standard library's I/O module so we can read from stdin.
 use std::io;
+use std::process;
 
 // The `main` function is where your program starts executing.
 fn main() {
@@ -15,10 +16,14 @@ fn main() {
     let mut rdr = csv::Reader::from_reader(io::stdin());
     // Loop over each record.
     for result in rdr.records() {
-        // An error may occur, so abort the program in an unfriendly way.
-        // We will make this more friendly later!
-        let record = result.expect("a CSV record");
-        // Print a debug version of the record.
-        println!("{:?}", record);
+// exam. results ; OK -> Ok() ; problems -> print error message 
+        match result {
+            Ok(record) => println!("{:?}", record),
+            Err(err) => { 
+                println!("error reading file from <stdin>{}", err);
+            process::exit(1);
+            }
+
+        }
     }
 }
