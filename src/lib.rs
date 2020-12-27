@@ -29,8 +29,7 @@ pub fn run_stdin() -> Result<(), Box<dyn Error>> {
 #[allow(dead_code)] 
 fn run_file() -> Result<(), Box<dyn Error>> {
     let file_path = get_first_arg()?;
-    let file = File::open(file_path)?;
-    let mut rdr = csv::Reader::from_reader(file);
+    let mut rdr = csv::Reader::from_file(file_path);
     for result in rdr.records() {
         let record = result?;
         println!("{:?}", record);
