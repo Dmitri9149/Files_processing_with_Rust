@@ -1,24 +1,23 @@
 // basing on the acticle about csv crate 
 // https://docs.rs/csv/1.0.0/csv/tutorial/index.html  
-//////////////////////////////////////////////////////
-
+// ========================================================
 extern crate csv;
 use std::io;
 use std::process;
+use std::env;
 use std::error::Error;
-
-// work with file 
 use std::ffi::OsString;
 use std::fs::File;
 
 fn main() {
-    if let Err(err) = run_stdin() {
+    if let Err(err) = run_file() {
         println!("{}", err);
         process::exit(1);
     }
 }
 
-pub fn run_stdin() -> Result<(), Box<dyn Error>> {
+#[allow(dead_code)]
+fn run_stdin() -> Result<(), Box<dyn Error>> {
     // Create a CSV parser that reads data from stdin.
     let mut rdr = csv::Reader::from_reader(io::stdin());
     // Loop over each record.
@@ -30,3 +29,25 @@ pub fn run_stdin() -> Result<(), Box<dyn Error>> {
     }
     Ok(())
 }
+
+fn run_file() -> Result<(), Box<dyn Error>> {
+    let file_path = get_first_arg()?;
+    let file = File::open(file_path)?;
+    let mut rdr = csv::Reader::from_reader(file);
+    for result in rdr.records() {
+        let record = result?;
+        println!("{:?}", record);
+    }
+    Ok(())
+}
+
+// Returns the first positional argument sent to this process. If there are no
+// positional arguments, then this returns an error.
+
+fn get_first_arg() -> Result<OsString, Box<dyn Error>> {
+    match env::args_os().nth(1) {
+        None => Err(From::from("expected 1 argument, but got none")),
+        Some(file_path) => Ok(file_path),
+    }
+}
+
