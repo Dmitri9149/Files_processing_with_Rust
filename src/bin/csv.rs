@@ -7,6 +7,10 @@ use std::io;
 use std::process;
 use std::error::Error;
 
+// work with file 
+use std::ffi::OsString;
+use std::fs::File;
+
 fn main() {
     if let Err(err) = run_stdin() {
         println!("{}", err);
