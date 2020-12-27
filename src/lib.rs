@@ -5,6 +5,8 @@ use std::error::Error;
 
 
 // determened in crate ./bin/csv.rs
+// read from stdin like 
+//$ ./target/debug/csv < uspop.csv
 pub fn run_stdin() -> Result<(), Box<dyn Error>> {
     // Create a CSV parser that reads data from stdin.
     let mut rdr = csv::Reader::from_reader(io::stdin());
