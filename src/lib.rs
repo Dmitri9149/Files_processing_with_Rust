@@ -1,10 +1,11 @@
+#[allow(unused_imports)] 
 extern crate csv;
 use std::io;
 #[allow(unused_imports)] use std::process;
 use std::env;
 use std::error::Error;
 use std::ffi::OsString;
-use std::fs::File;
+#[allow(unused_imports)] use std::fs::File;
 
 
 // determened in crate ./bin/csv.rs
@@ -29,7 +30,7 @@ pub fn run_stdin() -> Result<(), Box<dyn Error>> {
 #[allow(dead_code)] 
 fn run_file() -> Result<(), Box<dyn Error>> {
     let file_path = get_first_arg()?;
-    let mut rdr = csv::Reader::from_file(file_path);
+    let mut rdr = csv::Reader::from_path(file_path)?;
     for result in rdr.records() {
         let record = result?;
         println!("{:?}", record);
