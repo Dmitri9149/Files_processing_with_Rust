@@ -19,3 +19,16 @@ pub fn run_stdin() -> Result<(), Box<dyn Error>> {
     }
     Ok(())
 }
+
+// determened in crate ./bin/csv.rs
+// read from file like 
+fn run_file() -> Result<(), Box<dyn Error>> {
+    let file_path = get_first_arg()?;
+    let file = File::open(file_path)?;
+    let mut rdr = csv::Reader::from_reader(file);
+    for result in rdr.records() {
+        let record = result?;
+        println!("{:?}", record);
+    }
+    Ok(())
+}
