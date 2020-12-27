@@ -27,7 +27,7 @@ pub fn run_stdin() -> Result<(), Box<dyn Error>> {
 
 // determened in crate ./bin/csv.rs
 // read from file like
-#[allow(dead_code)] 
+#[allow(dead_code)]
 fn run_file() -> Result<(), Box<dyn Error>> {
     let file_path = get_first_arg()?;
     let mut rdr = csv::Reader::from_path(file_path)?;
