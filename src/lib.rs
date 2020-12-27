@@ -3,6 +3,8 @@ use std::io;
 use std::process;
 use std::error::Error;
 
+
+// determened in crate ./bin/csv.rs
 pub fn run_stdin() -> Result<(), Box<dyn Error>> {
     // Create a CSV parser that reads data from stdin.
     let mut rdr = csv::Reader::from_reader(io::stdin());
