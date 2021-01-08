@@ -9,6 +9,6 @@ fn main() {
     let filename = &args[2];
 
     println!("Searching for {}", query);
-    println!("In file  {}", fiename);
+    println!("In file  {}", filename);
 
 }
