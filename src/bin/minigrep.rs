@@ -1,4 +1,5 @@
 use std::env;
+use std::fs;
 
 
 // read args from stdin
@@ -10,5 +11,10 @@ fn main() {
 
     println!("Searching for {}", query);
     println!("In file  {}", filename);
+
+    let contents = fs::read_to_string(filename)
+        .expect("Something went wrong with file reading");
+
+    println!("The file (text) content:\n{}", contents);
 
 }
