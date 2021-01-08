@@ -4,27 +4,30 @@ use std::fs;
 
 // read args from stdin
 fn main() {
-    let args: Vec<String> = env::args().collect();
+  let args: Vec<String> = env::args().collect();
 
-    let config = Config::new(&args);
+  let config = Config::new(&args);
 
-    println!("Searching for {}", config.query);
-    println!("In file  {}", config.filename);
+  println!("Searching for {}", config.query);
+  println!("In file  {}", config.filename);
 
-    let contents = fs::read_to_string(config.filename)
-        .expect("Something went wrong with file reading");
+  let contents = fs::read_to_string(config.filename)
+      .expect("Something went wrong with file reading");
 
-    println!("The file (text) content:\n{}", contents);
+  println!("The file (text) content:\n{}", contents);
 }
 
 struct Config {
-    query: String,
-    filename: String
+  query: String,
+  filename: String
 }
 impl Config {
   fn new(args: &[String]) -> Config {
-      let query = args[1].clone();
-      let filename = args[2].clone();
-      Config { query, filename }
+    if args.len() < 3 {
+      panic!("not enought arguments")
+    }
+    let query = args[1].clone();
+    let filename = args[2].clone();
+    Config { query, filename }
   }
 }
